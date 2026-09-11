@@ -1,3 +1,13 @@
-# Vercel installs this file at the project root. Keep backend/requirements.txt
-# as the single source of truth by referencing it here.
--r backend/requirements.txt
+# Kept in sync with backend/requirements.txt manually — Vercel's Python
+# build step failed to parse the `-r backend/requirements.txt` include
+# directive this file used to have (pip supports it locally, but Vercel's
+# requirements.txt parser does not), so the actual package list has to
+# live here directly instead of being referenced.
+Flask==2.3.3
+Flask-CORS==4.0.0
+python-nmap==0.7.1
+psutil==5.9.6
+netifaces==0.11.0
+scapy==2.5.0
+python-dotenv==1.0.0
+reportlab==4.2.5
