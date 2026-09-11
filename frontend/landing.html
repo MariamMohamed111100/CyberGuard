@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CyberGuard - Network Security Monitoring">
+    <title data-i18n="landing.brand">CyberGuard | Your LAN's paranoid roommate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <script src="js/i18n.js"></script>
+</head>
+<body class="lp-page">
+    <div class="lp-orb o1"></div>
+    <div class="lp-orb o2"></div>
+    <div class="lp-orb o3"></div>
+
+    <header class="lp-nav">
+        <a href="/" class="lp-logo">
+            <span class="lp-logo-ic"><i class="fas fa-shield-halved"></i></span>
+            <span data-i18n="landing.brand">CyberGuard</span>
+        </a>
+        <div class="lp-nav-actions">
+            <button class="lp-btn lp-btn-ghost lp-lang-btn" id="lang-toggle" aria-label="Language">EN</button>
+            <a href="/login" class="lp-btn lp-btn-ghost" data-i18n="landing.signIn">Sign In</a>
+            <a href="/dashboard" class="lp-btn lp-btn-primary" data-i18n="landing.getStarted">Launch Dashboard</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="lp-hero">
+            <div class="lp-hero-content">
+                <div class="lp-hero-badge">
+                    <span class="lp-badge-dot"></span>
+                    <span data-i18n="landing.badge">Live LAN monitoring</span>
+                </div>
+                <h1>
+                    <span data-i18n="landing.headline">Know every device on your network.</span>
+                    <span class="lp-hero-accent" data-i18n="landing.headlineAccent">Before they know you.</span>
+                </h1>
+                <p class="lead" data-i18n="landing.subtitle">CyberGuard stays up all night watching your LAN. Spotting rogue devices, open ports, and CVEs before they become headlines.</p>
+                <div class="lp-hero-actions">
+                    <a href="/dashboard" class="lp-btn lp-btn-primary lp-btn-lg">
+                        <i class="fas fa-rocket"></i>
+                        <span data-i18n="landing.startFree">Open the Dashboard</span>
+                    </a>
+                    <a href="#how" class="lp-btn lp-btn-outline lp-btn-lg" data-i18n="landing.watchDemo">How it works</a>
+                </div>
+                <div class="lp-hero-trust">
+                    <span class="lp-trust-item"><i class="fas fa-microchip"></i> <span data-i18n="landing.trustedBy">Runs on a Raspberry Pi, a VPS, or that dusty laptop in the closet</span></span>
+                </div>
+            </div>
+
+            <div class="lp-hero-visual">
+                <div class="lp-orb-mini m1"></div>
+                <div class="lp-orb-mini m2"></div>
+                <div class="lp-frame">
+                    <div class="lp-frame-bar"><span></span><span></span><span></span></div>
+                    <div class="lp-frame-stats">
+                        <div class="lp-mini-stat"><b data-count="47">0</b><span data-i18n="landing.devices">Devices tracked</span></div>
+                        <div class="lp-mini-stat"><b data-count="3">0</b><span data-i18n="landing.alerts">Threats flagged</span></div>
+                        <div class="lp-mini-stat"><b data-count="182">0</b><span data-i18n="landing.ports">Ports mapped</span></div>
+                    </div>
+                    <div class="lp-radar">
+                        <div class="lp-radar-sweep"></div>
+                        <span class="lp-radar-blip b1"></span>
+                        <span class="lp-radar-blip b2"></span>
+                        <span class="lp-radar-blip b3"></span>
+                    </div>
+                    <p class="lp-frame-note"><span class="lp-note-blip"></span>watching 192.168.1.0/24</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lp-strip">
+            <div class="lp-strip-grid">
+                <div class="lp-stat-cell"><span class="lp-stat-num" data-count="60">0</span><i class="fas fa-bolt"></i><div class="lp-stat-label" data-i18n="landing.scanSeconds">sec scan cycle</div></div>
+                <div class="lp-stat-cell"><span class="lp-stat-num">24/7</span><div class="lp-stat-label" data-i18n="landing.selfHosted">self-hosted</div></div>
+                <div class="lp-stat-cell"><span class="lp-stat-num" data-count="4">0</span><div class="lp-stat-label" data-i18n="landing.reportFormats">report formats</div></div>
+                <div class="lp-stat-cell"><span class="lp-stat-num" data-count="2">0</span><div class="lp-stat-label" data-i18n="landing.languages">languages</div></div>
+            </div>
+        </section>
+
+        <section id="features" class="lp-section">
+            <div class="lp-section-head">
+                <h2 data-i18n="landing.featuresTitle">Superpowers, included</h2>
+                <p data-i18n="landing.featuresSubtitle">No plugins, no cloud, no setup theater. Just open the dashboard</p>
+            </div>
+            <div class="lp-features-grid">
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-magnifying-glass"></i></div>
+                    <h3 data-i18n="landing.f1.title">Continuous Scanning</h3>
+                    <p data-i18n="landing.f1.desc">Auto-discovers devices every 60 seconds using ARP plus an nmap fallback.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-user-secret"></i></div>
+                    <h3 data-i18n="landing.f2.title">Rogue Detection</h3>
+                    <p data-i18n="landing.f2.desc">Alerts you the second an unknown device, ARP spoof, or binding change appears.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-bug"></i></div>
+                    <h3 data-i18n="landing.f3.title">CVE Lookups</h3>
+                    <p data-i18n="landing.f3.desc">One-click vulnerability check per device with smart layered caching.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-desktop"></i></div>
+                    <h3 data-i18n="landing.f4.title">OS Fingerprinting</h3>
+                    <p data-i18n="landing.f4.desc">Identifies the OS behind each IP with accuracy scores, cached for an hour.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-envelope"></i></div>
+                    <h3 data-i18n="landing.f5.title">Multi-Channel Alerts</h3>
+                    <p data-i18n="landing.f5.desc">Telegram, Email (SMTP), and Webhooks. Delivered in parallel, best-effort.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-file-pdf"></i></div>
+                    <h3 data-i18n="landing.f6.title">Professional Reports</h3>
+                    <p data-i18n="landing.f6.desc">Export CSV, JSON, HTML, or PDF with charts and advice baked in.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-language"></i></div>
+                    <h3 data-i18n="landing.f7.title">AR/EN + Dark Mode</h3>
+                    <p data-i18n="landing.f7.desc">Full RTL support, instant language switch, persistent theme.</p>
+                </article>
+                <article class="lp-feature">
+                    <div class="lp-feature-ic"><i class="fas fa-user-shield"></i></div>
+                    <h3 data-i18n="landing.f8.title">Role-Based Access</h3>
+                    <p data-i18n="landing.f8.desc">Single admin account with full control. Session-based secure authentication.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="how" class="lp-section" style="margin-top: 4.5rem;">
+            <div class="lp-section-head">
+                <h2 data-i18n="landing.stepsTitle">From clueless to covered</h2>
+                <p data-i18n="landing.stepsSubtitle">Three moves and your network stops being a mystery</p>
+            </div>
+            <div class="lp-steps">
+                <div class="lp-steps-line"></div>
+                <div class="lp-step">
+                    <div class="lp-step-num">1</div>
+                    <h3 data-i18n="landing.step1.title">Discover</h3>
+                    <p data-i18n="landing.step1.desc">ARP scan + nmap fallback maps every device, MAC, and open port on your LAN.</p>
+                </div>
+                <div class="lp-step">
+                    <div class="lp-step-num">2</div>
+                    <h3 data-i18n="landing.step2.title">Detect</h3>
+                    <p data-i18n="landing.step2.desc">Rogue devices, ARP spoofing, and port changes light up the alerts panel instantly.</p>
+                </div>
+                <div class="lp-step">
+                    <div class="lp-step-num">3</div>
+                    <h3 data-i18n="landing.step3.title">Protect</h3>
+                    <p data-i18n="landing.step3.desc">Authorize trusted hardware, look up CVEs, and export printable reports.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lp-cta">
+            <div class="lp-cta-card">
+                <h2 data-i18n="landing.ctaTitle">Stop asking 'what's on my WiFi?'</h2>
+                <p data-i18n="landing.ctaSubtitle">Self-hosted. Private. Runs on a Raspberry Pi or a small VPS.</p>
+                <a href="/dashboard" class="lp-btn lp-btn-primary lp-btn-lg">
+                    <i class="fas fa-shield-halved"></i>
+                    <span data-i18n="landing.ctaButton">Open the Dashboard</span>
+                </a>
+                <p class="lp-cta-note" data-i18n="landing.ctaNote">No account needed to look. Sign in only when you want to manage.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="lp-footer">
+        <div class="lp-footer-grid">
+            <div class="lp-footer-brand">
+                <a href="/" class="lp-logo" style="margin-bottom: 1rem;">
+                    <span class="lp-logo-ic"><i class="fas fa-shield-halved"></i></span>
+                    <span data-i18n="landing.brand">CyberGuard</span>
+                </a>
+                <p data-i18n="landing.footerDesc">The friend that watches your network at 3 AM so you can sleep.</p>
+            </div>
+            <div>
+                <h4 data-i18n="landing.product">Product</h4>
+                <ul>
+                    <li><a href="#features" data-i18n="landing.features">Features</a></li>
+                    <li><a href="/dashboard" data-i18n="landing.dashboard">Dashboard</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 data-i18n="landing.company">Company</h4>
+                <ul>
+                    <li><a href="#" data-modal="about" data-i18n="landing.about">About</a></li>
+                    <li><a href="#" data-modal="security" data-i18n="landing.security">Security</a></li>
+                    <li><a href="#" data-modal="privacy" data-i18n="landing.privacy">Privacy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 data-i18n="landing.resources">Resources</h4>
+                <ul>
+                    <li><a href="/login" data-i18n="landing.login">Login</a></li>
+                    <li><a href="https://github.com" data-clip="git clone https://github.com/<you>/cyberwatch.git" data-i18n-title="lp.docs.copyHint" target="_blank" rel="noopener" data-i18n="landing.github">GitHub</a></li>
+                    <li><a href="#" data-lp-docs data-i18n="landing.docs">Docs</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="lp-footer-bottom">
+            <p data-i18n="landing.copyright">© 2026 CyberGuard. Self-hosted. Open source.</p>
+            <span class="lp-built" data-i18n="landing.builtWith">Built with Python · Flask · Nmap · coffee</span>
+        </div>
+    </footer>
+
+    <!-- Info modals: About / Security / Privacy -->
+    <div class="lp-modal" id="lp-modal" hidden aria-hidden="true">
+        <div class="lp-modal-backdrop" data-lp-close></div>
+        <div class="lp-modal-card" role="dialog" aria-modal="true" aria-labelledby="lp-modal-title">
+            <button class="lp-modal-x" id="lp-modal-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="lp-panel" id="lp-panel-about">
+                <div class="lp-panel-icon"><i class="fas fa-code-branch"></i></div>
+                <h3 id="lp-modal-title" data-i18n="lp.about.title">About CyberGuard</h3>
+                <p data-i18n="lp.about.body">CyberGuard started with a question: why does network security need a PhD, a VPN subscription, and a weekend of YAML? So we built a self-hosted watchdog that scans your LAN on its own schedule, spots what changed, and tells you what matters in plain words.</p>
+                <div class="lp-chips">
+                    <span class="lp-chip"><i class="fas fa-cloud"></i> <span data-i18n="lp.about.c1">0 cloud servers</span></span>
+                    <span class="lp-chip"><i class="fas fa-bolt"></i> <span data-i18n="lp.about.c2">60 sec scan cycles</span></span>
+                    <span class="lp-chip"><i class="fas fa-gauge-high"></i> <span data-i18n="lp.about.c3">1 dashboard</span></span>
+                </div>
+            </div>
+
+            <div class="lp-panel" id="lp-panel-security" hidden>
+                <div class="lp-panel-icon"><i class="fas fa-lock"></i></div>
+                <h3 data-i18n="lp.security.title">Security posture</h3>
+                <p data-i18n="lp.security.body">Everything runs on your machine. Scans stay inside your LAN, the admin dashboard lives behind a signed session, and nothing phones home. If a feature needs admin rights, it asks for them; if it does not, it leaves your privileges alone.</p>
+                <div class="lp-chips">
+                    <span class="lp-chip"><i class="fas fa-key"></i> <span data-i18n="lp.security.c1">Session-based auth</span></span>
+                    <span class="lp-chip"><i class="fas fa-eye-slash"></i> <span data-i18n="lp.security.c2">No telemetry</span></span>
+                    <span class="lp-chip"><i class="fas fa-database"></i> <span data-i18n="lp.security.c3">Local SQLite only</span></span>
+                </div>
+            </div>
+
+            <div class="lp-panel" id="lp-panel-privacy" hidden>
+                <div class="lp-panel-icon"><i class="fas fa-user-shield"></i></div>
+                <h3 data-i18n="lp.privacy.title">Privacy promise</h3>
+                <p data-i18n="lp.privacy.body">There is no data to sell, because nothing ever leaves home. The dashboard holds device IPs, MACs and ports for your own eyes only, and your preferences live in your browser, not on a server.</p>
+                <div class="lp-chips">
+                    <span class="lp-chip"><i class="fas fa-house-circle-check"></i> <span data-i18n="lp.privacy.c1">Data stays local</span></span>
+                    <span class="lp-chip"><i class="fas fa-user-tag"></i> <span data-i18n="lp.privacy.c2">Anonymous usage</span></span>
+                    <span class="lp-chip"><i class="fas fa-scroll"></i> <span data-i18n="lp.privacy.c3">The log is yours</span></span>
+                </div>
+            </div>
+
+            <div class="lp-panel" id="lp-panel-docs" hidden>
+                <div class="lp-panel-icon"><i class="fas fa-book-open"></i></div>
+                <h3 data-i18n="lp.docs.title">Quick start</h3>
+                <p data-i18n="lp.docs.body">Self-hosted in one command. No accounts to create, no cloud to sync.</p>
+                <div class="lp-code">
+                    <div class="lp-code-row" data-clip="pip install -r requirements.txt" title="Copy">
+                        <span class="lp-code-num">1</span>
+                        <code>pip install -r requirements.txt</code>
+                        <span class="lp-code-copy"><i class="fas fa-copy"></i></span>
+                    </div>
+                    <div class="lp-code-row" data-clip="python backend/app.py" title="Copy">
+                        <span class="lp-code-num">2</span>
+                        <code>python backend/app.py</code>
+                        <span class="lp-code-copy"><i class="fas fa-copy"></i></span>
+                    </div>
+                    <div class="lp-code-row" data-clip="http://localhost:5000" title="Copy">
+                        <span class="lp-code-num">3</span>
+                        <code>open http://localhost:5000</code>
+                        <span class="lp-code-copy"><i class="fas fa-copy"></i></span>
+                    </div>
+                </div>
+                <div class="lp-chips">
+                    <span class="lp-chip"><i class="fas fa-server"></i> <span data-i18n="lp.docs.c1">Self-hosted</span></span>
+                    <span class="lp-chip"><i class="fas fa-cloud-slash"></i> <span data-i18n="lp.docs.c2">No cloud</span></span>
+                    <span class="lp-chip"><i class="fas fa-code"></i> <span data-i18n="lp.docs.c3">Open source</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating toast for clipboard feedback -->
+    <div class="lp-toast" id="lp-toast" hidden>
+        <i class="fas fa-check"></i>
+        <span></span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Info modals (About / Security / Privacy)
+            const modal = document.getElementById('lp-modal');
+            const closeBtn = document.getElementById('lp-modal-close');
+            const openInfoModal = (name) => {
+                document.querySelectorAll('.lp-panel').forEach((p) => {
+                    p.hidden = p.id !== `lp-panel-${name}`;
+                });
+                modal.hidden = false;
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('lp-modal-open');
+                closeBtn.focus();
+            };
+            const closeInfoModal = () => {
+                modal.hidden = true;
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('lp-modal-open');
+            };
+            document.querySelectorAll('[data-modal]').forEach((a) => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openInfoModal(a.dataset.modal);
+                });
+            });
+            closeBtn.addEventListener('click', closeInfoModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target.closest('[data-lp-close]')) closeInfoModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.hidden) closeInfoModal();
+            });
+            document.querySelectorAll('[data-lp-docs]').forEach((a) => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openInfoModal('docs');
+                });
+            });
+
+            // Clipboard: clone command + docs quick-start lines
+            const toast = document.getElementById('lp-toast');
+            const toastMsg = toast.querySelector('span');
+            let toastTimer = null;
+            const showToast = () => {
+                toastMsg.textContent = document.documentElement.lang === 'ar'
+                    ? 'تم النسخ إلى الحافظة'
+                    : 'Copied to clipboard';
+                toast.hidden = false;
+                toast.classList.add('lp-toast-show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('lp-toast-show');
+                    toast.hidden = true;
+                }, 2000);
+            };
+            document.querySelectorAll('[data-clip]').forEach((el) => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const text = el.dataset.clip;
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(showToast, showToast);
+                    } else {
+                        const ta = document.createElement('textarea');
+                        ta.value = text;
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand('copy'); } catch (err) {}
+                        document.body.removeChild(ta);
+                        showToast();
+                    }
+                });
+            });
+
+            // Animate numbers up once in view
+            const counters = document.querySelectorAll('[data-count]');
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        const el = entry.target;
+                        io.unobserve(el);
+                        const target = parseInt(el.dataset.count, 10);
+                        const dur = 1200;
+                        const start = performance.now();
+                        const step = (now) => {
+                            const p = Math.min((now - start) / dur, 1);
+                            const eased = 1 - Math.pow(1 - p, 3);
+                            el.textContent = Math.round(target * eased).toLocaleString();
+                            if (p < 1) requestAnimationFrame(step);
+                        };
+                        requestAnimationFrame(step);
+                    });
+                }, { threshold: 0.4 });
+                counters.forEach((el) => io.observe(el));
+            } else {
+                counters.forEach((el) => { el.textContent = el.dataset.count; });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CyberGuard Login">
+    <title data-i18n="login.title">CyberGuard | Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <script src="js/i18n.js"></script>
+</head>
+<body class="lp-page login">
+    <div class="lp-orb o1"></div>
+    <div class="lp-orb o2"></div>
+
+    <div class="lp-login-wrap">
+        <div class="lp-login-brand">
+            <a href="/" class="lp-logo">
+                <span class="lp-logo-ic"><i class="fas fa-shield-halved"></i></span>
+                <span data-i18n="landing.brand">CyberGuard</span>
+            </a>
+        </div>
+
+        <div class="lp-login-card">
+            <h1 data-i18n="login.title">Welcome Back</h1>
+            <p class="lp-login-sub" data-i18n="login.subtitle">Sign in to access your security dashboard</p>
+
+            <form id="login-form" novalidate>
+                <div class="lp-form-group">
+                    <label for="login-username" class="lp-form-label" data-i18n="login.username">Username</label>
+                    <div class="lp-input-wrap">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="login-username" name="username" autocomplete="username" required placeholder="admin" data-i18n-placeholder="login.username">
+                    </div>
+                </div>
+
+                <div class="lp-form-group">
+                    <label for="login-password" class="lp-form-label" data-i18n="login.password">Password</label>
+                    <div class="lp-input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" name="password" autocomplete="current-password" required placeholder="••••••••" data-i18n-placeholder="login.password">
+                        <button type="button" class="lp-pw-toggle" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lp-login-error" id="login-error" role="alert" aria-live="polite"></div>
+
+                <button type="submit" class="lp-btn lp-btn-primary lp-btn-lg" id="login-btn">
+                    <span class="btn-text"><i class="fas fa-sign-in-alt"></i> <span data-i18n="login.login">Sign In</span></span>
+                    <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> <span data-i18n="login.signingIn">Signing in...</span></span>
+                </button>
+            </form>
+
+            <div class="lp-login-footer">
+                <a href="/" class="back-home">
+                    <i class="fas fa-arrow-left"></i>
+                    <span data-i18n="landing.backHome">Back to Home</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="lp-login-minis">
+            <span class="lp-ministrip"><i class="fas fa-magnifying-glass"></i> <span data-i18n="landing.f1.title">Continuous Scanning</span></span>
+            <span class="lp-ministrip"><i class="fas fa-user-secret"></i> <span data-i18n="landing.f2.title">Rogue Detection</span></span>
+            <span class="lp-ministrip"><i class="fas fa-bug"></i> <span data-i18n="landing.f3.title">CVE Lookups</span></span>
+            <span class="lp-ministrip"><i class="fas fa-file-pdf"></i> <span data-i18n="landing.f6.title">Professional Reports</span></span>
+        </div>
+    </div>
+
+    <script src="js/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.querySelector('.lp-pw-toggle');
+            const passwordInput = document.getElementById('login-password');
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', () => {
+                    const type = passwordInput.type === 'password' ? 'text' : 'password';
+                    passwordInput.type = type;
+                    toggleBtn.querySelector('i').classList.toggle('fa-eye');
+                    toggleBtn.querySelector('i').classList.toggle('fa-eye-slash');
+                });
+            }
+
+            const form = document.getElementById('login-form');
+            const errorEl = document.getElementById('login-error');
+            const btn = document.getElementById('login-btn');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoading = btn.querySelector('.btn-loading');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                errorEl.style.display = 'none';
+                errorEl.textContent = '';
+
+                const username = document.getElementById('login-username').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                if (!username || !password) {
+                    showError(window.i18n ? window.i18n.t('login.invalid') : 'Please enter username and password');
+                    return;
+                }
+
+                btn.disabled = true;
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-flex';
+
+                try {
+                    const res = await fetch('/api/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ username, password })
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok && data.status === 'ok') {
+                        window.location.href = '/dashboard';
+                    } else {
+                        showError(data.error || (window.i18n ? window.i18n.t('login.invalidToast') : 'Invalid credentials'));
+                    }
+                } catch (err) {
+                    showError(window.i18n ? window.i18n.t('login.invalidToast') : 'Connection error. Please try again.');
+                } finally {
+                    btn.disabled = false;
+                    btnText.style.display = 'inline-flex';
+                    btnLoading.style.display = 'none';
+                }
+            });
+
+            function showError(msg) {
+                errorEl.textContent = msg;
+                errorEl.style.display = 'flex';
+                document.getElementById('login-username').focus();
+            }
+
+            document.getElementById('login-password').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('login-form').dispatchEvent(new Event('submit'));
+            });
+        });
+    </script>
+</body>
+</html>

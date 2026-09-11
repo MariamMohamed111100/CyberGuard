@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Monitor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="/" class="logo-link" aria-label="CyberGuard home" title="CyberGuard">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>CyberGuard</h1>
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> <span data-i18n="nav.dashboard">Dashboard</span></a></li>
+                    <li><a href="#devices"><i class="fas fa-network-wired"></i> <span data-i18n="nav.devices">Devices</span></a></li>
+                    <li><a href="#topology"><i class="fas fa-project-diagram"></i> <span data-i18n="nav.topology">Topology</span></a></li>
+                    <li><a href="#ports"><i class="fas fa-plug"></i> <span data-i18n="nav.ports">Ports</span></a></li>
+                    <li><a href="#alerts"><i class="fas fa-bell"></i> <span data-i18n="nav.alerts">Alerts</span></a></li>
+                    <li class="login-required"><a href="#reports"><i class="fas fa-chart-bar"></i> <span data-i18n="nav.reports">Reports</span></a></li>
+                </ul>
+            </nav>
+            
+            <div class="system-status">
+                <h3 data-i18n="nav.systemStatus">System Status</h3>
+                <div class="status-indicator active">
+                    <span class="status-dot"></span>
+                    <span data-i18n="nav.monitoringActive">Monitoring Active</span>
+                </div>
+                <div class="last-scan">
+                    <i class="far fa-clock"></i>
+                    <span id="last-scan-time" data-i18n="nav.neverScanned">Never scanned</span>
+                </div>
+                <div class="last-scan">
+                    <i class="fas fa-network-wired"></i>
+                    <span id="current-subnet" data-i18n="nav.subnetDetecting">Subnet: detecting...</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-btn" id="sidebar-toggle" aria-label="Menu" title="Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 data-i18n="header.securityDashboard">Security Dashboard</h2>
+                    <div class="scan-controls admin-only">
+                        <button id="scan-btn" class="btn btn-primary">
+                            <i class="fas fa-search"></i> <span data-i18n="header.scanNetwork">Scan Network</span>
+                        </button>
+                        <button id="auto-scan-btn" class="btn btn-secondary">
+                            <i class="fas fa-sync-alt"></i> <span data-i18n="header.autoScan">Auto Scan</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="btn btn-sm icon-btn" id="theme-toggle" data-i18n-title="header.theme" title="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button class="btn btn-sm" id="lang-toggle">العربية</button>
+                    </div>
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="user-name">Guest</span>
+                        <button class="btn btn-sm" id="login-btn" style="display: none;">
+                            <i class="fas fa-sign-in-alt"></i> <span data-i18n="header.login">Login</span>
+                        </button>
+                        <button class="btn btn-sm" id="logout-btn" style="display: none;">
+                            <i class="fas fa-sign-out-alt"></i> <span data-i18n="header.logout">Logout</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <section class="stats-cards" id="dashboard">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-desktop"></i>
+                        <h3 data-i18n="stats.devices">Devices</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="total-devices">0</h2>
+                        <p id="unauthorized-devices">0 unauthorized</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3 data-i18n="stats.alerts">Alerts</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="total-alerts">0</h2>
+                        <p id="high-alerts">0 high risk</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-plug"></i>
+                        <h3 data-i18n="stats.openPorts">Open Ports</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="total-ports">0</h2>
+                        <p id="risky-ports">0 risky</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3 data-i18n="stats.securityScore">Security Score</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="security-score">--</h2>
+                        <p id="risk-level" data-i18n="stats.noData">No data</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts -->
+            <section class="charts-row">
+                <div class="chart-card">
+                    <div class="section-header">
+                        <h3><i class="fas fa-desktop"></i> <span data-i18n="charts.deviceAuth">Device Authorization</span></h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-devices"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="section-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> <span data-i18n="charts.portRisk">Port Risk Distribution</span></h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-risk"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Network Topology -->
+            <section class="content-section" id="topology">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> <span data-i18n="topology.networkTopology">Network Topology</span></h3>
+                </div>
+                <div class="topology-wrap">
+                    <canvas id="topology-canvas" width="900" height="520"></canvas>
+                    <div class="topology-legend">
+                        <span><span class="legend-dot router"></span> <span data-i18n="topology.gateway">Gateway</span></span>
+                        <span><span class="legend-dot authorized"></span> <span data-i18n="status.authorized">Authorized</span></span>
+                        <span><span class="legend-dot unauthorized"></span> <span data-i18n="status.unauthorized">Unauthorized</span></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content Area -->
+                <!-- Devices Table -->
+                <section class="content-section" id="devices">
+                    <div class="section-header">
+                        <h3><i class="fas fa-network-wired"></i> <span data-i18n="devices.networkDevices">Network Devices</span></h3>
+                        <div class="section-actions">
+                            <button class="btn btn-sm" id="refresh-devices" data-i18n-title="devices.refresh" title="Refresh">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="devices-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="devices.status">Status</th>
+                                    <th data-i18n="devices.ipAddress">IP Address</th>
+                                    <th data-i18n="devices.macAddress">MAC Address</th>
+                                    <th data-i18n="devices.hostname">Hostname</th>
+                                    <th data-i18n="devices.vendor">Vendor</th>
+                                    <th data-i18n="devices.openPorts">Open Ports</th>
+                                    <th data-i18n="devices.actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="devices-body">
+                                <!-- Devices will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Alerts Panel -->
+                <section class="content-section" id="alerts">
+                    <div class="section-header">
+                        <h3><i class="fas fa-bell"></i> <span data-i18n="alerts.securityAlerts">Security Alerts</span></h3>
+                        <span class="badge badge-danger" id="alerts-count">0</span>
+                    </div>
+                    <div class="alerts-container" id="alerts-list">
+                        <!-- Alerts will be loaded here -->
+                        <div class="no-data">
+                            <i class="fas fa-check-circle"></i>
+                            <p data-i18n="alerts.noAlerts">No security alerts detected</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Port Details -->
+                <section class="content-section" id="ports" style="display: none;">
+                    <div class="section-header">
+                        <h3><i class="fas fa-plug"></i> <span data-i18n="ports.portDetails">Port Details</span> - <span id="selected-device-ip"></span></h3>
+                        <button class="btn btn-sm" id="close-port-details">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table id="ports-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="ports.port">Port</th>
+                                    <th data-i18n="ports.service">Service</th>
+                                    <th data-i18n="ports.state">State</th>
+                                    <th data-i18n="ports.version">Version</th>
+                                    <th data-i18n="ports.riskLevel">Risk Level</th>
+                                    <th data-i18n="ports.advice">Advice</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ports-body">
+                                <!-- Ports will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Security Recommendations -->
+                <section class="content-section" id="reports">
+                    <div class="section-header">
+                        <h3><i class="fas fa-lightbulb"></i> <span data-i18n="rec.securityRecommendations">Security Recommendations</span></h3>
+                    </div>
+                    <div class="advice-container" id="security-advice">
+                        <!-- Advice will be loaded here -->
+                        <div class="no-data">
+                            <i class="fas fa-info-circle"></i>
+                            <p data-i18n="rec.runScanForAdvice">Run a network scan to get security recommendations</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Scan History -->
+                <section class="content-section" id="scan-history">
+                    <div class="section-header">
+                        <h3><i class="fas fa-chart-line"></i> <span data-i18n="rec.scanHistory">Scan History</span></h3>
+                    </div>
+                    <div class="chart-container reports-chart">
+                        <canvas id="chart-history"></canvas>
+                    </div>
+                </section>
+
+                <!-- Scan-to-Scan Changes -->
+                <section class="content-section" id="diff">
+                    <div class="section-header">
+                        <h3><i class="fas fa-exchange-alt"></i> <span data-i18n="rec.scanDiff">Scan-to-Scan Changes</span></h3>
+                    </div>
+                    <div class="scan-diff" id="scan-diff">
+                        <div class="no-data">
+                            <i class="fas fa-info-circle"></i>
+                            <p data-i18n="rec.runTwoScans">Run at least two scans to see what changed between them.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Export Report -->
+                <section class="content-section login-required" id="export-report">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-export"></i> <span data-i18n="rec.exportReport">Export Report</span></h3>
+                    </div>
+                    <div class="export-actions">
+                        <button class="btn btn-secondary" id="export-csv">
+                            <i class="fas fa-file-csv"></i> <span data-i18n="rec.exportCSV">Export CSV</span>
+                        </button>
+                        <button class="btn btn-secondary" id="export-json">
+                            <i class="fas fa-file-code"></i> <span data-i18n="rec.exportJSON">Export JSON</span>
+                        </button>
+                        <button class="btn btn-secondary" id="export-html">
+                            <i class="fas fa-code"></i> <span data-i18n="rec.exportHTML">Export HTML</span>
+                        </button>
+                        <button class="btn btn-secondary" id="export-pdf">
+                            <i class="fas fa-file-pdf"></i> <span data-i18n="rec.exportPDF">Export PDF</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Traffic Sniffer -->
+                <section class="content-section login-required" id="sniffer">
+                    <div class="section-header">
+                        <h3><i class="fas fa-wave-square"></i> <span data-i18n="rec.trafficSniffer">Traffic Sniffer</span></h3>
+                    </div>
+                    <div class="sniff-controls admin-only" id="sniff-controls">
+                        <select id="sniff-duration" class="btn btn-secondary">
+                            <option value="5" data-i18n="rec.sec" data-i18n-vars="5">5 seconds</option>
+                            <option value="15" selected data-i18n="rec.sec" data-i18n-vars="15">15 seconds</option>
+                            <option value="30" data-i18n="rec.sec" data-i18n-vars="30">30 seconds</option>
+                            <option value="60" data-i18n="rec.sec" data-i18n-vars="60">60 seconds</option>
+                        </select>
+                        <button class="btn btn-primary" id="sniff-start">
+                            <i class="fas fa-play"></i> <span data-i18n="rec.startCapture">Start Capture</span>
+                        </button>
+                    </div>
+                    <div class="sniff-live" id="sniff-live" style="display: none;">
+                        <div class="sniff-live-stats">
+                            <span>Packets: <strong id="sniff-packets">0</strong></span>
+                            <span>Bytes: <strong id="sniff-bytes">0</strong></span>
+                            <span>Rate: <strong id="sniff-rate">0</strong></span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-bar" id="sniff-progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="sniff-result" id="sniff-result"></div>
+                    <p class="sniff-note" id="sniff-note" style="display: none;">
+                        Capturing traffic requires administrator privileges and Npcap on Windows.
+                    </p>
+                </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>Cyber Security Monitor v1.0 | Last Updated: <span id="current-time"></span></p>
+                <p class="system-info">CPU: <span id="cpu-usage">--</span>% | Memory: <span id="memory-usage">--</span>%</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Device Modal -->
+    <div class="modal" id="device-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="modal.deviceDetails">Device Details</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="device-modal-body">
+                <!-- Device details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>
